@@ -1,13 +1,21 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
+import SideBar from '../components/custom/sidebar.vue'
+
 export default defineComponent({
-  name: 'main'
+  name: 'picture',
+  components: {
+    SideBar,
+  },
+  setup(props, ctx) {
+  },
 })
 </script>
 
 <template>
   <div class="background"/>
+  <side-bar class="side-bar"/>
 </template>
 
 <style lang="stylus" scoped>
@@ -18,16 +26,6 @@ export default defineComponent({
   min-width 100vw
   opacity 0.9
   z-index -1
-  animation shallow 10s linear alternate infinite
-
-@keyframes shallow {
-  0% {
-    background url("../assets/earth-1.jpg") no-repeat
-    background-size 100% 100%
-  }
-  100% {
-    background url("../assets/earth-2.jpg") no-repeat
-    background-size 100% 100%
-  }
-}
+  background url("../assets/picture_bg.jpg") no-repeat
+  background-size 100% 100%
 </style>

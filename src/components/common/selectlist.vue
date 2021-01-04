@@ -8,7 +8,7 @@ interface listType {
  }
 }
 export default defineComponent({
-  name: 'SelectListRow',
+  name: 'SelectList',
   props: {
     list: {
       type: Array as PropType<listType>,
@@ -30,7 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="select-list-row">
+  <div class="select-list">
     <div
       v-for="(item, index) in list"
       :key="index"
@@ -45,8 +45,9 @@ export default defineComponent({
 </template>
 
 <style lang="stylus" scoped>
-.select-list-row
+.select-list
   display flex
+  flex-direction column
   justify-content space-between
   .linear-line
     margin 5px auto 0

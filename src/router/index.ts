@@ -6,5 +6,9 @@ export default createRouter({
       path: '/',
       name: 'Home',
       component: () => import('../view/main.vue'),
+  }, {
+    path: '/picture',
+    name: 'Picture',
+    component: () => import('../view/picture.vue'),
   }]
 })

@@ -1,7 +1,8 @@
 <script lang='ts'>
 import { defineComponent, ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
-import SelectListRow from '../common/selectlistrow.vue';
+import SelectListRow from '../common/selectlistrow.vue'
 
 export default defineComponent({
   name: 'NavBar',
@@ -9,17 +10,28 @@ export default defineComponent({
     SelectListRow,
   },
   setup(props, ctx) {
-    const collections = ref(['图片', '音乐', '视频', '文章', '电子书'])
-    const selfinfo = ref(['我的博客', '背景信息', '联系方式'])
+    const collections = ref([{ name: '图片', key: 'picture' },
+                             { name: '音乐', key: 'music' },
+                             { name: '视频', key: 'vedio' },
+                             { name: '文章', key: 'article' },
+                             { name: '电子书', key: 'ebook'}])
+    const selfinfo = ref([{ name: '我的博客', key: 'myblog' },
+                          { name: '背景信息', key: 'backgroundinfo'},
+                          { name: '联系方式', key: 'contactinfo'}])
     const fontStyle = reactive({
       color: '#def',
       fontSize: '15px',
       fontWeight: '300',
     })
+
+    const router = useRouter()
+    const handleClick = (key) => { router.push(key) }
+
     return {
       collections,
       fontStyle,
       selfinfo,
+      handleClick,
     }
   },
 })
@@ -31,8 +43,11 @@ export default defineComponent({
       class="list"
       :list="collections"
       :font-style="fontStyle"
+      @click="handleClick"
     />
-    <h1>Reminisce</h1>
+    <h1
+      @click="handleClick('/')"
+    >Reminisce</h1>
     <select-list-row
       class="list"
       :list="selfinfo"
@@ -59,6 +74,7 @@ header
     text-align center
     border 2px outset #eee
     border-radius 20px
+    cursor pointer
   .list
     width 300px
 </style>
