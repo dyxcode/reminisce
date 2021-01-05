@@ -2,11 +2,13 @@
 import { defineComponent } from 'vue'
 
 import SideBar from '../components/custom/sidebar.vue'
+import WaterfallFlow from '../components/common/waterfallflow.vue'
 
 export default defineComponent({
   name: 'picture',
   components: {
     SideBar,
+    WaterfallFlow,
   },
   setup(props, ctx) {
   },
@@ -15,7 +17,8 @@ export default defineComponent({
 
 <template>
   <div class="background"/>
-  <side-bar class="side-bar"/>
+  <!-- <side-bar class="side-bar"/> -->
+  <waterfall-flow/>
 </template>
 
 <style lang="stylus" scoped>

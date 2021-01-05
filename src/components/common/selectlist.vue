@@ -39,7 +39,6 @@ export default defineComponent({
         :style="fontStyle"
         @click="handleClick(item.key)"
       >{{ item.name }}</span>
-      <div class="linear-line"></div>
     </div>
   </div>
 </template>
@@ -49,13 +48,7 @@ export default defineComponent({
   display flex
   flex-direction column
   justify-content space-between
-  .linear-line
-    margin 5px auto 0
-    border-bottom 1.5px solid #abcdef
-    width 0
-    transition-duration 0.5s
+  align-items center
   &>div
     cursor pointer
-    &:hover .linear-line
-      width 100%
 </style>

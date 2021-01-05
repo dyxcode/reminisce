@@ -48,13 +48,13 @@ export default defineComponent({
 .select-list-row
   display flex
   justify-content space-between
-  .linear-line
-    margin 5px auto 0
-    border-bottom 1.5px solid #abcdef
-    width 0
-    transition-duration 0.5s
   &>div
     cursor pointer
+    .linear-line
+      margin 5px auto 0
+      border-bottom 1.5px solid #abcdef
+      width 0
+      transition-duration 0.5s
     &:hover .linear-line
       width 100%
 </style>
