@@ -10,5 +10,9 @@ export default createRouter({
     path: '/picture',
     name: 'Picture',
     component: () => import('../view/picture.vue'),
+  }, {
+    path: '/music',
+    name: 'Music',
+    component: () => import('../view/music.vue'),
   }]
 })

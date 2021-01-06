@@ -1,24 +1,30 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
-import SideBar from '../components/custom/sidebar.vue'
-import WaterfallFlow from '../components/common/waterfallflow.vue'
+import Waterfall from '../components/common/waterfall.vue'
 
 export default defineComponent({
-  name: 'picture',
+  name: 'Music',
   components: {
-    SideBar,
-    WaterfallFlow,
+    Waterfall
   },
   setup(props, ctx) {
+    const imgList = Array(20).fill(0).map((_, index) => {
+      return `src/assets/test${index % 7 + 1}.jpg`
+    })
+    return {
+      imgList
+    }
   },
 })
 </script>
 
 <template>
   <div class="background"/>
-  <!-- <side-bar class="side-bar"/> -->
-  <waterfall-flow/>
+  <waterfall
+    class="waterfall"
+    :list="imgList"
+  />
 </template>
 
 <style lang="stylus" scoped>
@@ -31,4 +37,7 @@ export default defineComponent({
   z-index -1
   background url("../assets/picture_bg.jpg") no-repeat
   background-size 100% 100%
+.waterfall
+  width 80%
+  margin 0 auto
 </style>

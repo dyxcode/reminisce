@@ -13,11 +13,11 @@ export default defineComponent({
     const collections = ref([{ name: '图片', key: 'picture' },
                              { name: '音乐', key: 'music' },
                              { name: '视频', key: 'vedio' },
-                             { name: '文章', key: 'article' },
+                             { name: '博客', key: 'blog' },
                              { name: '电子书', key: 'ebook'}])
-    const selfinfo = ref([{ name: '我的博客', key: 'myblog' },
-                          { name: '背景信息', key: 'backgroundinfo'},
-                          { name: '联系方式', key: 'contactinfo'}])
+    const selfinfo = ref([{ name: '趣味实验', key: 'expriment' },
+                          { name: '背景信息', key: 'background'},
+                          { name: '联系方式', key: 'contact'}])
     const fontStyle = reactive({
       color: '#def',
       fontSize: '15px',
