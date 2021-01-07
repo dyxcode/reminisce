@@ -2,12 +2,12 @@
 import { defineComponent, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
-import SelectListRow from '../common/selectlistrow.vue'
+import SelectList from '../common/selectlist.vue'
 
 export default defineComponent({
   name: 'NavBar',
   components: {
-    SelectListRow,
+    SelectList,
   },
   setup(props, ctx) {
     const collections = ref([{ name: '图片', key: 'picture' },
@@ -18,18 +18,12 @@ export default defineComponent({
     const selfinfo = ref([{ name: '趣味实验', key: 'expriment' },
                           { name: '背景信息', key: 'background'},
                           { name: '联系方式', key: 'contact'}])
-    const fontStyle = reactive({
-      color: '#def',
-      fontSize: '15px',
-      fontWeight: '300',
-    })
 
     const router = useRouter()
     const handleClick = (key) => { router.push(key) }
 
     return {
       collections,
-      fontStyle,
       selfinfo,
       handleClick,
     }
@@ -39,19 +33,17 @@ export default defineComponent({
 
 <template>
   <header>
-    <select-list-row
-      class="list"
+    <select-list
+      class="select-list"
       :list="collections"
-      :font-style="fontStyle"
       @click="handleClick"
     />
     <h1
       @click="handleClick('/')"
     >Reminisce</h1>
-    <select-list-row
-      class="list"
+    <select-list
+      class="select-list"
       :list="selfinfo"
-      :font-style="fontStyle"
     />
   </header>
 </template>
@@ -75,6 +67,9 @@ header
     border 2px outset #eee
     border-radius 20px
     cursor pointer
-  .list
+  .select-list
     width 300px
+    color #def
+    font-size 15px
+    font-weight '300'
 </style>

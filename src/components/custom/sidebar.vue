@@ -14,14 +14,8 @@ export default defineComponent({
                              { name: '视频', key: 'vedio' },
                              { name: '文章', key: 'article' },
                              { name: '电子书', key: 'ebook'}])
-    const fontStyle = reactive({
-      color: '#ccc',
-      fontSize: '18px',
-      fontWeight: '500',
-    })
     return {
       collections,
-      fontStyle,
     }
   },
 })
@@ -32,7 +26,6 @@ export default defineComponent({
     <select-list
       class="select-list"
       :list="collections"
-      :font-style="fontStyle"
     />
   </aside>
 </template>
@@ -43,4 +36,7 @@ aside
   height 30vh
   .select-list
     height 100%
+    color #ccc
+    font-size 18px
+    font-weight 500
 </style>

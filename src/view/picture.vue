@@ -4,7 +4,7 @@ import { defineComponent } from 'vue'
 import Waterfall from '../components/common/waterfall.vue'
 
 export default defineComponent({
-  name: 'Music',
+  name: 'Picture',
   components: {
     Waterfall
   },
