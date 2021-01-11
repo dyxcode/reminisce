@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, PropType, ref, reactive, onMounted } from 'vue'
+import { defineComponent, PropType, ref, reactive, onMounted, Ref } from 'vue'
 
 export default defineComponent({
   name: 'Waterfall',
@@ -18,7 +18,7 @@ export default defineComponent({
     }
   },
   setup(prop, ctx) {
-    const waterfall = ref(null)
+    const waterfall: Ref<HTMLElement | null> = ref(null)
     let imglist = ref<{ top: number; left: number; width: number; height: number; src: string }[]>([])
     // preload image
     const preloadList = prop.list.map(src => {
@@ -28,7 +28,7 @@ export default defineComponent({
     })
     onMounted(async () => {
       // compute image width
-      const width = (waterfall.value.clientWidth - prop.gap.verticalGap * (prop.columnNumber - 1)) / prop.columnNumber
+      const width = ((waterfall.value as HTMLElement).clientWidth - prop.gap.verticalGap * (prop.columnNumber - 1)) / prop.columnNumber
       // push preload image into imglist
       let columnArray = Array(prop.columnNumber).fill(0) // record the offset at the bottom
       const pushIntoImglist = (img: HTMLImageElement) => {

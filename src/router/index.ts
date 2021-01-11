@@ -5,14 +5,18 @@ export default createRouter({
   routes: [{
       path: '/',
       name: 'Home',
-      component: () => import('../view/main.vue'),
+      component: () => import('../view/home/home.vue'),
   }, {
     path: '/picture',
     name: 'Picture',
-    component: () => import('../view/picture.vue'),
+    component: () => import('../view/picture/picture.vue'),
   }, {
     path: '/music',
     name: 'Music',
-    component: () => import('../view/music.vue'),
+    component: () => import('../view/music/music.vue'),
+  }, {
+    path: '/video',
+    name: 'video',
+    component: () => import('../view/video/video.vue'),
   }]
 })

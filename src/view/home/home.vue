@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Main'
+  name: 'Home'
 })
 </script>
 
@@ -22,11 +22,11 @@ export default defineComponent({
 
 @keyframes shallow {
   0% {
-    background url("../assets/earth-1.jpg") no-repeat
+    background url("../../assets/earth-1.jpg") no-repeat
     background-size 100% 100%
   }
   100% {
-    background url("../assets/earth-2.jpg") no-repeat
+    background url("../../assets/earth-2.jpg") no-repeat
     background-size 100% 100%
   }
 }

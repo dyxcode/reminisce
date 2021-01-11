@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+
+    // 启用所有严格类型检查选项
+    // noImplicitAny, noImplicitThis, alwaysStrict， strictNullChecks, strictFunctionTypes, strictPropertyInitialization
+    "strict": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/types/images.d.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -22,7 +22,7 @@ export default defineComponent({
   },
   emits: ['click'],
   setup(prop, ctx) {
-    const handleClick = (key) => { ctx.emit('click', key) }
+    const handleClick = (key: string) => { ctx.emit('click', key) }
     return {
       handleClick,
     }

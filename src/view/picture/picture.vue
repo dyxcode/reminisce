@@ -1,7 +1,7 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
-import Waterfall from '../components/common/waterfall.vue'
+import Waterfall from './waterfall.vue'
 
 export default defineComponent({
   name: 'Picture',
@@ -35,7 +35,7 @@ export default defineComponent({
   min-width 100vw
   opacity 0.9
   z-index -1
-  background url("../assets/picture_bg.jpg") no-repeat
+  background url("../../assets/picture_bg.jpg") no-repeat
   background-size 100% 100%
 .waterfall
   width 80%

@@ -2,25 +2,24 @@
 import { defineComponent, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
-import SelectList from '../common/selectlist.vue'
+import SelectList from '../components/selectlist.vue'
 
 export default defineComponent({
-  name: 'NavBar',
   components: {
     SelectList,
   },
   setup(props, ctx) {
     const collections = ref([{ name: '图片', key: 'picture' },
                              { name: '音乐', key: 'music' },
-                             { name: '视频', key: 'vedio' },
+                             { name: '视频', key: 'video' },
                              { name: '博客', key: 'blog' },
-                             { name: '电子书', key: 'ebook'}])
+                             { name: '文件', key: 'file'}])
     const selfinfo = ref([{ name: '趣味实验', key: 'expriment' },
                           { name: '背景信息', key: 'background'},
                           { name: '联系方式', key: 'contact'}])
 
     const router = useRouter()
-    const handleClick = (key) => { router.push(key) }
+    const handleClick = (key: string) => { router.push(key) }
 
     return {
       collections,
@@ -46,6 +45,7 @@ export default defineComponent({
       :list="selfinfo"
     />
   </header>
+  <router-view/>
 </template>
 
 <style lang="stylus" scoped>
