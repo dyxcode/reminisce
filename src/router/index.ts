@@ -18,5 +18,13 @@ export default createRouter({
     path: '/video',
     name: 'video',
     component: () => import('../view/video/video.vue'),
+  }, {
+    path: '/blog',
+    name: 'blog',
+    component: () => import('../view/blog/blog.vue'),
+  }, {
+    path: '/file',
+    name: 'file',
+    component: () => import('../view/file/file.vue'),
   }]
 })

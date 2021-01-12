@@ -5,7 +5,7 @@ export default defineComponent({
   name: 'VideoList',
   setup(props, ctx) {
     return {
-      videoList: Array(10).fill({
+      list: Array(10).fill({
           src: 'https://apd-34e1256be4b1f33673fec54677934bba.v.smtcdns.com/mv.music.tc.qq.com/A9H0FzETdksQf_UXU7L3DsyDFE6I6TRIDrVx-QjBbZEI/FA93E0531E9E4C01171B6A354CA068B4BE15D94B7B773F3012A20C39D8BBD7E83FA7867D5F9A3E9A11EBBE558335B2A0ZZqqmusic_default/qmmv_0b6bcmaacaaaamadhkf6tfpvieyaaejqaaka.f9844.mp4?fname=qmmv_0b6bcmaacaaaamadhkf6tfpvieyaaejqaaka.f9844.mp4',
           title: '给电影人的情书',
         }),
@@ -18,7 +18,7 @@ export default defineComponent({
   <div class="video-list">
     <div
       class="item"
-      v-for="(item, idx) in videoList"
+      v-for="(item, idx) in list"
       :key="idx"
     >
       <video

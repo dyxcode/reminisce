@@ -1,12 +1,12 @@
 <script lang='ts'>
 import { defineComponent} from 'vue'
 
-import BlogList from './bloglist.vue'
+import FileList from './filelist.vue'
 
 export default defineComponent({
-  name: 'Blog',
+  name: 'File',
   components: {
-    BlogList,
+    FileList,
   },
   setup(props, ctx) {
 
@@ -16,7 +16,7 @@ export default defineComponent({
 
 <template>
   <div class="background"/>
-  <blog-list class="blog-list"/>
+  <file-list class="file-list"/>
 </template>
 
 <style lang="stylus" scoped>
@@ -29,7 +29,7 @@ export default defineComponent({
   z-index -1
   background url("../../assets/picture_bg.jpg") no-repeat
   background-size 100% 100%
-.blog-list
+.file-list
   width 80%
   margin 0 auto
 </style>
