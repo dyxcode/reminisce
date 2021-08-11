@@ -1,0 +1,28 @@
+version: "3"
+ 
+services:
+  django:
+    build: ./django
+    expose:
+      - "8000"
+    volumes:
+      - ./sqlite:/server/sqlite # 挂载数据库数据, 可读可写
+      - ./static:/server/static
+      - ./upload:/server/upload
+    restart: always
+    command: bash start.sh
+
+  nginx:
+    build: ./nginx
+    ports:
+        - "80:80"
+        - "8000:80"
+    expose:
+        - "80"
+        - "8000"
+    volumes:
+        - ./static:/static # 挂载静态文件
+        - ./dist:/dist # 挂载静态文件
+    depends_on:
+      - django
+    restart: always
