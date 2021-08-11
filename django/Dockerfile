@@ -4,6 +4,6 @@ WORKDIR /server/django
 
 COPY . /server/django
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 
 CMD [ "sh", "-c", "bash start.sh" ]
