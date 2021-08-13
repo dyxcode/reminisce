@@ -1,32 +1,40 @@
 <script lang='ts'>
-import { defineComponent, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { defineComponent, ref } from 'vue'
 
 import KeyBoard from './keyboard.vue'
+import Upload from './upload.vue'
 
 export default defineComponent({
   components: {
     KeyBoard,
+    Upload,
   },
   setup(props, ctx) {
-    const route = useRoute()
-    const router = useRouter()
-    onMounted(() => {
-      window.addEventListener('hashchange',() => {
-        const currentPath = window.location.hash.slice(1)
-        console.log(currentPath)
-        if(route.path !== currentPath){
-          router.push(currentPath) // 动态跳转
-        }
-      },false)
-    })
+    const showUploadModal = ref(false)
+    return {
+      showUploadModal,
+      handleUploadClick() {
+        showUploadModal.value = true
+      },
+      handleClose() {
+        showUploadModal.value = false
+      }
+    }
   },
 })
 </script>
 
 <template>
-  <key-board/>
-  <router-view/>
+  <div>
+    <router-view></router-view>
+    <key-board
+      @uploadClick="handleUploadClick"
+    ></key-board>
+    <upload
+      v-if="showUploadModal"
+      @close="handleClose"
+    ></upload>
+  </div>
 </template>
 
 <style lang="stylus" scoped>

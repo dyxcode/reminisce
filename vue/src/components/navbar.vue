@@ -38,14 +38,13 @@ export default defineComponent({
   <el-row
     justify="space-around"
     align="bottom"
-    class="navbar"
   >
     <el-col
       v-for="(item, index) in collections"
       :key="index"
       :span="1"
     >
-      <span>{{ item.name }}</span>
+      <span @click="handleClick(item.key)">{{ item.name }}</span>
       <div class="linear-line"></div>
     </el-col>
 
@@ -60,32 +59,20 @@ export default defineComponent({
       <div class="linear-line"></div>
     </el-col>
   </el-row>
-  <el-row></el-row>
-    <!-- <h1
-      @click="handleClick('/')"
-    >Reminisce</h1>
-    <select-list
-      class="select-list"
-      :list="selfinfo"
-    /> -->
 </template>
 
 <style lang="stylus" scoped>
-.navbar
+.el-row
   width 80%
   height 100%
   margin 0 auto
   padding-bottom 10px
   text-align center
   white-space nowrap
+  color #cde
 
   .el-col
-    .title
-      font-size 22px
-      font-weight 1000
-      color #ccc
-      border 2px outset #eee
-      border-radius 20px
+    span
       cursor pointer
     .linear-line
       margin 5px auto 0
@@ -94,17 +81,4 @@ export default defineComponent({
       transition-duration 0.5s
     &:hover .linear-line
       width 100%
-
-.navbaraaa
-  display flex
-  justify-content space-between
-  align-items center
-  width 80%
-  
-  .select-list
-    width 300px
-    color #def
-    font-size 15px
-    font-weight 300
-
 </style>

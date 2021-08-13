@@ -3,6 +3,10 @@ from django.utils import timezone
 
 class ImageModel(models.Model):
 
+  width = models.IntegerField()
+
+  height = models.IntegerField()
+
   image = models.ImageField(upload_to='images/')
 
   created = models.DateTimeField(default=timezone.now)

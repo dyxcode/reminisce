@@ -1,26 +1,15 @@
 <script lang='ts'>
 import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Navbar',
+  emits: ['uploadClick'],
   setup(props, ctx) {
-    const router = useRouter()
-
     document.addEventListener('keyup', e => {
       if (e.key === 'u') {
-        router.push('upload')
+        ctx.emit('uploadClick')
       }
     })
-
-    return {
-    }
   },
 })
 </script>
-
-<template>
-</template>
-
-<style lang="stylus" scoped>
-</style>

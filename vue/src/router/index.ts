@@ -8,8 +8,8 @@ export default createRouter({
       component: () => import('../view/home/home.vue'),
   }, {
     path: '/image',
-    name: 'image',
-    component: () => import('../view/image/image.vue'),
+    name: 'imagelist',
+    component: () => import('../view/image/imagelist.vue'),
   }, {
     path: '/music',
     name: 'music',
@@ -30,10 +30,5 @@ export default createRouter({
     path: '/file',
     name: 'file',
     component: () => import('../view/file/file.vue'),
-  }
-  , {
-    path: '/upload',
-    name: 'upload',
-    component: () => import('../view/upload/upload.vue'),
   }]
 })

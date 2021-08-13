@@ -5,10 +5,6 @@ body,p,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,dt,dd{
   /* 默认有边距，都要清除 */
   margin: 0;
   padding: 0;
-  /*字体设置*/
-  font-size: 14px;
-  font-family: "Microsoft Yahei",sans-serif;
-  color: #222;
   /* 去掉列表的原点 */
   list-style: none;
   user-select: none;
@@ -25,13 +21,7 @@ input,img{
 
 /*行内元素*/
 a,a:active,a:visited{
-  /*下划线和颜色*/
   text-decoration: none;
-  color: #ccc;
-}
-
-a:hover{
-  color:#999;
 }
 
 textarea{
