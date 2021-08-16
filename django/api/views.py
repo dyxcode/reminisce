@@ -1,19 +1,11 @@
-from rest_framework import viewsets 
+from rest_framework import viewsets, generics
 
-from .models import ImageModel, MusicModel, VideoModel, FileModel, BlogModel
-from .serializers import ImageSerializer, MusicSerializer, VideoSerializer, FileSerializer,  BlogSerializer
+from .models import ImageModel, FileModel, BlogModel, RecentModel
+from .serializers import ImageSerializer, FileSerializer,  BlogSerializer, RecentSerializer
 
 class ImageViewSet(viewsets.ModelViewSet):
   queryset = ImageModel.objects.all()
   serializer_class = ImageSerializer
-
-class MusicViewSet(viewsets.ModelViewSet):
-  queryset = MusicModel.objects.all()
-  serializer_class = MusicSerializer
-
-class VideoViewSet(viewsets.ModelViewSet):
-  queryset = VideoModel.objects.all()
-  serializer_class = VideoSerializer
 
 class FileViewSet(viewsets.ModelViewSet):
   queryset = FileModel.objects.all()
@@ -22,3 +14,7 @@ class FileViewSet(viewsets.ModelViewSet):
 class BlogViewSet(viewsets.ModelViewSet):
   queryset = BlogModel.objects.all()
   serializer_class = BlogSerializer
+
+class RecentList(generics.ListAPIView):
+  queryset = RecentModel.objects.all()
+  serializer_class = RecentSerializer

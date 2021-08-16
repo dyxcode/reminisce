@@ -11,14 +11,6 @@ export default createRouter({
     name: 'imagelist',
     component: () => import('../view/image/imagelist.vue'),
   }, {
-    path: '/music',
-    name: 'music',
-    component: () => import('../view/music/music.vue'),
-  }, {
-    path: '/video',
-    name: 'video',
-    component: () => import('../view/video/video.vue'),
-  }, {
     path: '/blog',
     name: 'bloglist',
     component: () => import('../view/blog/bloglist.vue'),
@@ -28,7 +20,7 @@ export default createRouter({
     component: () => import('../view/blog/blogdetail.vue'),
   }, {
     path: '/file',
-    name: 'file',
-    component: () => import('../view/file/file.vue'),
+    name: 'filelist',
+    component: () => import('../view/file/filelist.vue'),
   }]
 })

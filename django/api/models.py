@@ -11,26 +11,6 @@ class ImageModel(models.Model):
 
   created = models.DateTimeField(default=timezone.now)
 
-class MusicModel(models.Model):
-
-  name = models.CharField(max_length=64)
-
-  singer = models.CharField(max_length=64)
-
-  duration = models.IntegerField()
-
-  music = models.FileField(upload_to='musics/')
-
-  created = models.DateTimeField(default=timezone.now)
-
-class VideoModel(models.Model):
-
-  name = models.CharField(max_length=64)
-
-  video = models.FileField(upload_to='videos/')
-
-  created = models.DateTimeField(default=timezone.now)
-
 class FileModel(models.Model):
 
   name = models.CharField(max_length=64)
@@ -50,3 +30,9 @@ class BlogModel(models.Model):
   created = models.DateTimeField(default=timezone.now)
 
   updated = models.DateTimeField(auto_now=True)
+
+class RecentModel(models.Model):
+
+  type = models.CharField(max_length=8)
+
+  target_id = models.BigIntegerField()

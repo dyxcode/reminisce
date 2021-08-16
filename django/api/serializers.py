@@ -1,20 +1,10 @@
 from rest_framework import serializers
 
-from .models import ImageModel, MusicModel, VideoModel, FileModel, BlogModel
+from .models import ImageModel, FileModel, BlogModel, RecentModel
 
 class ImageSerializer(serializers.ModelSerializer):
   class Meta:
     model = ImageModel
-    fields = ('__all__')
-
-class MusicSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = MusicModel
-    fields = ('__all__')
-
-class VideoSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = VideoModel
     fields = ('__all__')
 
 class FileSerializer(serializers.ModelSerializer):
@@ -25,4 +15,9 @@ class FileSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
   class Meta:
     model = BlogModel
+    fields = ('__all__')
+
+class RecentSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = RecentModel
     fields = ('__all__')

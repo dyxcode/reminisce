@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'Navbar',
@@ -10,6 +10,7 @@ export default defineComponent({
         ctx.emit('uploadClick')
       }
     })
+     return () => h('div') 
   },
 })
 </script>

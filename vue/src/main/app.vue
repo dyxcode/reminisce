@@ -36,6 +36,3 @@ export default defineComponent({
     ></upload>
   </div>
 </template>
-
-<style lang="stylus" scoped>
-</style>

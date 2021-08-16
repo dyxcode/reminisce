@@ -2,17 +2,10 @@
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import SelectList from './selectlist.vue'
-
 export default defineComponent({
   name: 'Navbar',
-  components: {
-    SelectList,
-  },
   setup(props, ctx) {
     const collections = ref([{ name: '图片', key: 'image' },
-                             { name: '音乐', key: 'music' },
-                             { name: '视频', key: 'video' },
                              { name: '博客', key: 'blog' },
                              { name: '文件', key: 'file'}])
     const selfinfo = ref([{ name: '趣味实验', key: 'expriment' },
@@ -43,17 +36,19 @@ export default defineComponent({
       v-for="(item, index) in collections"
       :key="index"
       :span="1"
+      :pull="1"
     >
       <span @click="handleClick(item.key)">{{ item.name }}</span>
       <div class="linear-line"></div>
     </el-col>
 
-    <el-col :span="8"></el-col>
+    <el-col :span="12"></el-col>
 
     <el-col
       v-for="(item, index) in selfinfo"
       :key="index"
       :span="2"
+      :push="3"
     >
       <span>{{ item.name }}</span>
       <div class="linear-line"></div>
