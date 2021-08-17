@@ -36,7 +36,7 @@ export default defineComponent({
 <template>
   <el-card :body-style="{ height: '100%' }">
     <el-container>
-      <el-header>{{ title }}</el-header>
+      <el-header height="30px">{{ title }}</el-header>
       <el-main>
         <el-scrollbar height="100%">
           <p
@@ -54,9 +54,14 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 .el-card
-  height 100%
+  height 80vh
   .el-container
     height 100%
+    .el-header
+      line-height 30px
+      font-size 25px
+      text-align center
     p
       line-height 20px
+      padding-bottom 10px
 </style>

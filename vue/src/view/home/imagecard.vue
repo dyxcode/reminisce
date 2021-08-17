@@ -1,37 +1,47 @@
 <script lang='ts'>
-import { defineComponent, ref, inject } from 'vue'
+import { defineComponent, ref, inject, PropType } from 'vue'
 
 export default defineComponent({
   name: 'ImageCard',
   props: {
-    id: {
-      type: Number,
+    ids: {
+      type: Array as PropType<Array<number>>,
       required: true,
     },
   },
   setup(props, ctx) {
     const axios: any = inject('axios')
-    const url = ref('')
+    const urls = ref(Array(props.ids.length).fill(''))
 
-    axios.get(`api/image/${props.id}`)
+    props.ids.forEach((id, i) => {
+      axios.get(`api/image/${id}`)
       .then((response: { data: any }) => {
-        url.value = response.data.image
+        urls.value[i] = response.data.image
       })
+    })
+    
     return {
-      url,
+      urls,
     }
   },
 })
 </script>
 
 <template>
-  <el-image
-    :src="url"
-    fit="contain"
-  ></el-image>
+  <el-carousel :interval="5000" height="100%">
+    <el-carousel-item v-for="(url, index) in urls" :key="index">
+      <el-image
+        :src="url"
+        fit="fill"
+      ></el-image>
+    </el-carousel-item>
+  </el-carousel>
 </template>
 
 <style lang="stylus" scoped>
-.el-image
-  height 100%
+.el-carousel
+  height 80vh
+  .el-image
+    height 100%
+    width 100%
 </style>

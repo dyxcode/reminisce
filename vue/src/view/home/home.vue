@@ -17,12 +17,21 @@ export default defineComponent({
     const axios: any = inject('axios')
     const cards = ref([])
     let doubleScreen = []
+    let imageCardIds = []
 
     axios.get('api/recent/')
       .then((response: { data: any[] }) => {
         while (response.data.length !== 0) {
           const firstElement = response.data.shift()
           buildCards(firstElement, response.data)
+        }
+        if (imageCardIds.length) {
+          insertSingleScreen({ component: shallowRef(ImageCard), data: { ids: imageCardIds }})
+          imageCardIds = []
+        }
+        if (doubleScreen.length) {
+          cards.value.push({ doubleScreen, isSingle: false })
+          doubleScreen = []
         }
         console.log(cards.value)
       })
@@ -35,7 +44,7 @@ export default defineComponent({
       } else if (el.type === 'blog') {
         insertDoubleScreen({ component: shallowRef(BlogCard), data: { id: el.target_id }})
       } else if (el.type === 'image') {
-        insertSingleScreen({ component: shallowRef(ImageCard), data: { id: el.target_id }})
+        imageCardIds.push(el.target_id)
       }
     }
 
@@ -44,6 +53,10 @@ export default defineComponent({
     }
 
     function insertDoubleScreen(payload: any) {
+      if (imageCardIds.length) {
+        insertSingleScreen({ component: shallowRef(ImageCard), data: { ids: imageCardIds }})
+        imageCardIds = []
+      }
       doubleScreen.push(payload)
       if (doubleScreen.length === 2) {
         cards.value.push({ doubleScreen, isSingle: false })
@@ -74,13 +87,15 @@ export default defineComponent({
   <el-container>
     <el-header height="50vh">
       <div class="img-container"></div>
-      <navbar></navbar>
+      <el-affix :offset="10">
+        <navbar></navbar>
+      </el-affix>
     </el-header>
     <el-main>
       <el-row
         v-for="(card, index) in cards"
         :key="index"
-        :gutter="10"
+        :gutter="50"
       >
         <el-col
           v-if="card.isSingle"
@@ -105,7 +120,7 @@ export default defineComponent({
         </template>
       </el-row>
     </el-main>
-    <el-footer>Footer</el-footer>
+    <el-footer height="0"></el-footer>
   </el-container>
 </template>
 
@@ -121,14 +136,16 @@ export default defineComponent({
     width 100%
     height 100%
     animation shallow 10s linear alternate infinite
+  .el-affix
+    position absolute
+    bottom 10px
+    width 100%
 
 .el-main
+  background-color #efdfc9
+  padding 20px 50px
   .el-row
-    height 80vh
     margin-bottom 10px
-    .el-col
-      height 100%
-      text-align center
 
 @keyframes shallow {
   0% {

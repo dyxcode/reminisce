@@ -30,7 +30,6 @@ export default defineComponent({
 <template>
   <el-row
     justify="space-around"
-    align="bottom"
   >
     <el-col
       v-for="(item, index) in collections"
@@ -59,9 +58,7 @@ export default defineComponent({
 <style lang="stylus" scoped>
 .el-row
   width 80%
-  height 100%
   margin 0 auto
-  padding-bottom 10px
   text-align center
   white-space nowrap
   color #cde
