@@ -70,6 +70,13 @@ export default defineComponent({
   </custom-page>
 </template>
 
+<style lang="stylus">
+.el-divider__text
+  background-color #f1e5c9
+  white-space nowrap
+  padding 0 5px
+</style>
+
 <style lang="stylus" scoped>
 .blog-list
   .item
@@ -82,4 +89,6 @@ export default defineComponent({
       color #3e484d
       font-size 15px
       line-height 30px
+    .el-divider
+      background-color #3e484d
 </style>

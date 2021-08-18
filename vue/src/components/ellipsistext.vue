@@ -59,6 +59,6 @@ export default defineComponent({
     position absolute
     right 0
     bottom 0
-    background-color white
+    background-color #f1e5c9
     white-space pre
 </style>

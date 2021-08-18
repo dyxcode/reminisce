@@ -43,23 +43,27 @@ export default defineComponent({
 </template>
 
 <style lang="stylus" scoped>
-.el-header
-  display flex
-  align-items center
-  background-color #030303
-  color #ccc
-  .header-back
-    position relative
-    z-index 1
-  .header-title
-    position absolute
-    left 0
-    width 100%
-    text-align center
-    color #ccc
+.el-container
+  background-color #f1e5c9
+  min-height 100vh
 
-.el-main
-  width 80%
-  margin 0 auto
-  padding-bottom 30px
+  .el-header
+    display flex
+    align-items center
+    background-color #030303
+    color #ccc
+    .header-back
+      position relative
+      z-index 1
+    .header-title
+      position absolute
+      left 0
+      width 100%
+      text-align center
+      color #ccc
+
+  .el-main
+    width 80%
+    margin 0 auto
+    padding-bottom 30px
 </style>

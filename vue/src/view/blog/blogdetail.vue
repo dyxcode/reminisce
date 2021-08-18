@@ -38,7 +38,7 @@ export default defineComponent({
 
 <template>
   <custom-page
-    back="返回博客清单"
+    back="博客清单"
     :title="title"
     @backClick="handleBackClick"
   >

@@ -2,7 +2,7 @@
 import { defineComponent, h } from 'vue'
 
 export default defineComponent({
-  name: 'Navbar',
+  name: 'KeyBoard',
   emits: ['uploadClick'],
   setup(props, ctx) {
     document.addEventListener('keyup', e => {

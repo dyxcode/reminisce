@@ -1,9 +1,11 @@
 <script lang='ts'>
 import { defineComponent, ref, shallowRef, inject } from 'vue'
-import Navbar from '../../components/navbar.vue'
+import Navbar from './navbar.vue'
 import ImageCard from './imagecard.vue'
 import BlogCard from './blogcard.vue'
 import FileCard from './filecard.vue'
+import LandscapeCards from './landscapecards.vue'
+import PortraitCards from './portraitcards.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -12,12 +14,20 @@ export default defineComponent({
     ImageCard,
     BlogCard,
     FileCard,
+    LandscapeCards,
+    PortraitCards,
   },
   setup(props, ctx) {
     const axios: any = inject('axios')
     const cards = ref([])
-    let doubleScreen = []
-    let imageCardIds = []
+    const orientation = ref(window.innerWidth > window.innerHeight)
+    const refreshKey = ref(0)
+
+    const fileCardItemHeight = 48
+    const fileCardPadding = 20
+    const fileCardBorder = 1
+    const fileCardContentHeight = window.innerHeight * 0.8 - (fileCardPadding + fileCardBorder) * 2
+    const fileCardRowNumber = Math.floor(fileCardContentHeight / fileCardItemHeight)
 
     axios.get('api/recent/')
       .then((response: { data: any[] }) => {
@@ -25,59 +35,59 @@ export default defineComponent({
           const firstElement = response.data.shift()
           buildCards(firstElement, response.data)
         }
-        if (imageCardIds.length) {
-          insertSingleScreen({ component: shallowRef(ImageCard), data: { ids: imageCardIds }})
-          imageCardIds = []
-        }
-        if (doubleScreen.length) {
-          cards.value.push({ doubleScreen, isSingle: false })
-          doubleScreen = []
-        }
-        console.log(cards.value)
+        // console.log(cards.value)
       })
 
+    let resizeTimer: number | null = null
+    window.onresize = () => {
+      if(resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        orientation.value = window.innerWidth > window.innerHeight
+        refreshKey.value++
+      }, 100)
+    }
+
     function buildCards(el: any, data: any[]) {
+      const card = { type: el.type }
       if (el.type === 'file') {
-        const fileIds = pickRestFiles(data).map(item => item.id)
-        const ids = [el.target_id, ...fileIds]
-        insertDoubleScreen({ component: shallowRef(FileCard), data: { ids }})
+        const ids = [el.target_id, ...pickRestFiles(data)]
+        card['component'] = shallowRef(FileCard)
+        card['data'] = { ids, rowNumber: fileCardRowNumber }
       } else if (el.type === 'blog') {
-        insertDoubleScreen({ component: shallowRef(BlogCard), data: { id: el.target_id }})
+        card['component'] = shallowRef(BlogCard)
+        card['data'] = { id: el.target_id }
       } else if (el.type === 'image') {
-        imageCardIds.push(el.target_id)
+        const ids = [el.target_id, ...pickRestImages(data)]
+        card['component'] = shallowRef(ImageCard)
+        card['data'] = { ids }
       }
-    }
-
-    function insertSingleScreen(singleScreen: any) {
-      cards.value.push({ singleScreen, isSingle: true })
-    }
-
-    function insertDoubleScreen(payload: any) {
-      if (imageCardIds.length) {
-        insertSingleScreen({ component: shallowRef(ImageCard), data: { ids: imageCardIds }})
-        imageCardIds = []
-      }
-      doubleScreen.push(payload)
-      if (doubleScreen.length === 2) {
-        cards.value.push({ doubleScreen, isSingle: false })
-        doubleScreen = []
-      }
+      cards.value.push(card)
     }
 
     function pickRestFiles(data: any[]) {
-      const files = []
+      const fileIds = []
       let index = 0
-      while (index !== -1 && files.length < 2) {
+      while (index !== -1 && fileIds.length < fileCardRowNumber - 2) {
         index = data.findIndex(item => { item.type === 'file' })
         if (index !== -1) {
-          files.push(...data.splice(index, 1))
+          fileIds.push(data.splice(index, 1)[0].target_id)
         }
       }
-      return files
+      return fileIds
+    }
+
+    function pickRestImages(data: any[]) {
+      const imageIds = []
+      while (data.length && data[0].type === 'image') {
+        imageIds.push(data.splice(0, 1)[0].target_id)
+      }
+      return imageIds
     }
 
     return {
       cards,
+      orientation,
+      refreshKey,
     }
   },
 })
@@ -85,40 +95,26 @@ export default defineComponent({
 
 <template>
   <el-container>
-    <el-header height="50vh">
+    <el-header height="100vh">
       <div class="img-container"></div>
-      <el-affix :offset="10">
-        <navbar></navbar>
-      </el-affix>
+      <navbar :key="refreshKey"></navbar>
+      <h1 class="yingwen">reminisce</h1>
+      <h1 class="zhongwen">昔日的快乐时光</h1>
+      <i class="el-icon-d-arrow-left"></i>
     </el-header>
     <el-main>
-      <el-row
-        v-for="(card, index) in cards"
-        :key="index"
-        :gutter="50"
-      >
-        <el-col
-          v-if="card.isSingle"
-        >
-          <component
-            :is="card.singleScreen.component"
-            v-bind="card.singleScreen.data"
-          ></component>
-        </el-col>
-
-        <template v-else>
-          <el-col
-            v-for="(item, index) in card.doubleScreen"
-            :key="index"
-            :span="12"
-          >
-            <component
-              :is="item.component"
-              v-bind="item.data"
-            ></component>
-          </el-col>
-        </template>
-      </el-row>
+      <transition name="el-fade-in-linear">
+        <div :key="refreshKey">
+          <landscape-cards
+            v-if="orientation"
+            :cards="cards"
+          ></landscape-cards>
+          <portrait-cards
+            v-else
+            :cards="cards"
+          ></portrait-cards>
+        </div>
+      </transition>
     </el-main>
     <el-footer height="0"></el-footer>
   </el-container>
@@ -129,23 +125,35 @@ export default defineComponent({
   position relative
   padding 0
   background-color #030303
-  overflow hidden
-
+  text-align center
   .img-container
     position absolute
     width 100%
     height 100%
     animation shallow 10s linear alternate infinite
-  .el-affix
-    position absolute
-    bottom 10px
-    width 100%
+  .navbar
+    position relative
+  h1
+    position relative
+    color #def
+    text-align center
+  .yingwen
+    margin-top 30vh
+    font-size 30px
+    font-weight 400
+    letter-spacing 3px
+  .zhongwen
+    margin-top 5vh
+    letter-spacing 0.5em
+  i
+    color #def
+    font-size 30px
+    margin-top 40vh
+    animation up 2s linear infinite
 
 .el-main
-  background-color #efdfc9
+  background-color #f1e5c9
   padding 20px 50px
-  .el-row
-    margin-bottom 10px
 
 @keyframes shallow {
   0% {
@@ -155,6 +163,15 @@ export default defineComponent({
   100% {
     background url("../../assets/earth-2.jpg") no-repeat center
     background-size contain
+  }
+}
+
+@keyframes up {
+  0% {
+    transform rotate(90deg)
+  }
+  100% {
+    transform rotate(90deg) translate(-2vh, 0)
   }
 }
 </style>

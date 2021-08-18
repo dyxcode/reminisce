@@ -18,9 +18,10 @@ export default defineComponent({
     onMounted(async () => {
       const response: { data: any[] } = await axios.get('api/image/')
       const verticalGap = 10
-      const columnNumber = 3
 
       function buildImgList() {
+        const columnNumber = Math.floor(innerWidth / 300)
+        
         imglist.value = []
         srclist.value = []
         // compute image width
