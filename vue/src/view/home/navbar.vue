@@ -1,6 +1,7 @@
 <script lang='ts'>
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'Navbar',
@@ -27,6 +28,14 @@ export default defineComponent({
       },
       handleExpandClick() {
         drawer.value = true
+      },
+      handleTodoClick() {
+        ElMessage({
+          message: '开发中，敬请期待～',
+          center: true,
+          type: 'info',
+          duration: 1000
+        })
       }
     }
   },
@@ -67,7 +76,7 @@ export default defineComponent({
           :key="index"
           :span="2"
         >
-          <span>{{ item.name }}</span>
+          <span @click="handleTodoClick">{{ item.name }}</span>
           <div class="linear-line"></div>
         </el-col>
       </el-row>

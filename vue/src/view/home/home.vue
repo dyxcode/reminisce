@@ -149,7 +149,7 @@ export default defineComponent({
     color #def
     font-size 30px
     margin-top 40vh
-    animation up 2s linear infinite
+    animation up 2s linear alternate infinite
 
 .el-main
   background-color #f1e5c9

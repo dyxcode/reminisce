@@ -2,6 +2,7 @@
 import { defineComponent, ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import CustomPage from '../../components/custompage.vue'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'FileList',
@@ -16,7 +17,6 @@ export default defineComponent({
     axios.get('api/file/')
       .then((response: { data: any[] }) => {
         response.data.forEach(item => {
-          // data.value.
           const time = item.created.substring(0, item.created.indexOf('.')).replace('T', ' ')
 
           let size = item.size
@@ -27,13 +27,26 @@ export default defineComponent({
             i++
           }
           size = `${size.toFixed(2)}${UNITS[i]}`
-          data.value.push({ name: item.name, size, time})
+          data.value.push({ src: item.file, name: item.name, size, time})
         })
       })
     return {
       data,
       handleBackClick() {
         router.push('/')
+      },
+      handleDbClick(row, column, event) {
+        const link = document.createElement('a')
+        link.href = row.src
+        link.setAttribute('download', row.name)
+        link.click()
+      },
+      handleItemClick() {
+        ElMessage({
+          message: '双击下载文件～',
+          center: true,
+          type: 'info'
+        })
       }
     }
   },
@@ -48,6 +61,8 @@ export default defineComponent({
   >
     <el-table
       :data="data"
+      @row-dblclick="handleDbClick"
+      @row-click="handleItemClick"
       stripe
     >
       <el-table-column
