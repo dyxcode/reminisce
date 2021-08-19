@@ -3,13 +3,13 @@ import { onUnmounted } from "vue"
 // fix
 // 当滑动屏幕的时候（有滚动条）图形会闪，换句话说，他会不断触发resize事件
 export default function () {
+  // Store the window width
+  let windowWidth = window.innerWidth
+  let windowHeight = window.innerHeight
   onUnmounted(() => {
     window.onresize = null
   })
   return function(callback: Function) {
-    // Store the window width
-    let windowWidth = window.innerWidth
-    let windowHeight = window.innerHeight
     let resizeTimer: any = null
 
     window.onresize = () => {

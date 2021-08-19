@@ -1,2 +1,2 @@
-cd vue && npm install && npm run build && mv dist/ ../dist/ && cd .. &&
+rm -rf dist && cd vue && npm install && npm run build && mv dist/ ../dist/ && cd .. &&
 docker-compose up --build
