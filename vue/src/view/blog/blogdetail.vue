@@ -53,7 +53,7 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 p
-  font-size 15px
+  font-size 16px
   text-indent 2em
   line-height 25px
   margin-bottom 10px

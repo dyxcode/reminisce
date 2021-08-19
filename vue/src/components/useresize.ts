@@ -22,23 +22,25 @@ export default function () {
     if(scrollTimer) clearTimeout(scrollTimer)
     scrollTimer = setTimeout(() => {
       window.onresize = resizeCb
-    }, 100)
+    }, 2000)
   }
 
   return function(callback: Function) {
     let resizeTimer: any = null
 
-    window.onresize = () => {
-      if (window.innerWidth !== windowWidth || window.innerHeight !== windowHeight) {
-        // Update the window width height for next time
-        windowWidth = window.innerWidth
-        windowHeight = window.innerHeight
-        // Do stuff here
-        if(resizeTimer) clearTimeout(resizeTimer)
-        resizeTimer = setTimeout(() => {
-          callback()
-        }, 100)
+    setTimeout(() => {
+      window.onresize = () => {
+        if (window.innerWidth !== windowWidth || window.innerHeight !== windowHeight) {
+          // Update the window width height for next time
+          windowWidth = window.innerWidth
+          windowHeight = window.innerHeight
+          // Do stuff here
+          if(resizeTimer) clearTimeout(resizeTimer)
+          resizeTimer = setTimeout(() => {
+            callback()
+          }, 100)
+        }
       }
-    }
+    }, 2000)
   }
 }

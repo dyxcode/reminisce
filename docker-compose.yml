@@ -21,6 +21,7 @@ services:
     volumes:
         - ./static:/static # 挂载静态文件
         - ./dist:/dist # 挂载静态文件
+        - ./upload:/upload
     depends_on:
       - django
     restart: always
