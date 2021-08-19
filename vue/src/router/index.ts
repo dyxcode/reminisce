@@ -1,4 +1,3 @@
-import { defineAsyncComponent } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 export default createRouter({
@@ -6,22 +5,22 @@ export default createRouter({
   routes: [{
     path: '/',
     name: 'home',
-    component: defineAsyncComponent(() => import('../view/home/home.vue')),
+    component: () => import('../view/home/home.vue'),
   }, {
     path: '/image',
     name: 'imagelist',
-    component: defineAsyncComponent(() => import('../view/image/imagelist.vue')),
+    component: () => import('../view/image/imagelist.vue'),
   }, {
     path: '/blog',
     name: 'bloglist',
-    component: defineAsyncComponent(() => import('../view/blog/bloglist.vue')),
+    component: () => import('../view/blog/bloglist.vue'),
   }, {
     path: '/blog/:id',
     name: 'blogdetail',
-    component: defineAsyncComponent(() => import('../view/blog/blogdetail.vue')),
+    component: () => import('../view/blog/blogdetail.vue'),
   }, {
     path: '/file',
     name: 'filelist',
-    component: defineAsyncComponent(() => import('../view/file/filelist.vue')),
+    component: () => import('../view/file/filelist.vue'),
   }]
 })

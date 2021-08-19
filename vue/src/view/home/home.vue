@@ -77,7 +77,7 @@ export default defineComponent({
       const fileIds = []
       let index = 0
       while (index !== -1 && fileIds.length < fileCardRowNumber - 2) {
-        index = data.findIndex(item => { item.type === 'file' })
+        index = data.findIndex(item => item.type === 'file')
         if (index !== -1) {
           fileIds.push(data.splice(index, 1)[0].target_id)
         }

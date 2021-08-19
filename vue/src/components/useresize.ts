@@ -12,9 +12,12 @@ export default function () {
     window.onscroll = null
   })
 
+  let resizeCb: typeof window.onresize = null
   let scrollTimer: any = null
   window.onscroll = () => {
-    const resizeCb = window.onresize
+    if (window.onresize && resizeCb === null) {
+      resizeCb = window.onresize
+    }
     window.onresize = null
     if(scrollTimer) clearTimeout(scrollTimer)
     scrollTimer = setTimeout(() => {
