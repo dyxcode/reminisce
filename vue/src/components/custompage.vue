@@ -27,14 +27,8 @@ export default defineComponent({
 <template>
   <el-container>
     <el-header height="50px">
-      <el-page-header @back="goBack">
-        <template #title>
-          <span class="header-back">{{ back }}</span>
-        </template>
-        <template #content>
-          <span class="header-title">{{ title }}</span>
-        </template>
-      </el-page-header>
+      <i class="el-icon-back" @click="goBack"></i>
+      <h2>{{ title }}</h2>
     </el-header>
     <el-main>
       <slot></slot>
@@ -52,14 +46,17 @@ export default defineComponent({
     align-items center
     background-color #030303
     color #ccc
-    .header-back
+    i
       position relative
       z-index 1
-    .header-title
+      font-size 20px
+      cursor pointer
+    h2
       position absolute
       left 0
       width 100%
       text-align center
+      font-weight 500
       color #ccc
 
   .el-main

@@ -47,7 +47,7 @@ export default defineComponent({
           </p>
         </el-scrollbar>
       </el-main>
-      <el-footer>发表于：{{ created }}</el-footer>
+      <el-footer height="auto">发表于：{{ created }}</el-footer>
     </el-container>
   </el-card>
 </template>
@@ -69,4 +69,5 @@ export default defineComponent({
         padding-bottom 10px
     .el-footer
       padding 10px 0 0
+      text-align center
 </style>
