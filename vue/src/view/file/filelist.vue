@@ -13,6 +13,7 @@ export default defineComponent({
     const router = useRouter()
     const axios: any = inject('axios')
     const data = reactive([])
+    let isclick = false
 
     axios.get('api/file/')
       .then((response: { data: any[] }) => {
@@ -42,6 +43,8 @@ export default defineComponent({
         link.click()
       },
       handleItemClick() {
+        if (isclick) return
+        isclick = true
         ElMessage({
           message: '双击下载文件～',
           center: true,
