@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, inject, ref, Ref } from 'vue'
+import { defineComponent, inject, ref, Ref, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 import CustomPage from '../../components/custompage.vue'
@@ -14,7 +14,7 @@ export default defineComponent({
     const router = useRouter()
     const axios: any = inject('axios')
     const title = ref('')
-    const paragraphs: Ref<String[]> = ref([])
+    const paragraphs = reactive([])
 
     axios.get(`api/blog/${route.params.id}`)
       .then((response: { data: any }) => {
@@ -22,7 +22,7 @@ export default defineComponent({
         title.value = response.data.title
         const article: String = response.data.text
         article.split('\n').forEach(item => {
-          paragraphs.value.push(item)
+          paragraphs.push(item)
         })
       })
     return {

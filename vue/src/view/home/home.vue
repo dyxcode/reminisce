@@ -1,11 +1,13 @@
 <script lang='ts'>
-import { defineComponent, ref, shallowRef, inject } from 'vue'
+import { defineComponent, ref, shallowRef, inject, reactive } from 'vue'
 import Navbar from './navbar.vue'
 import ImageCard from './imagecard.vue'
 import BlogCard from './blogcard.vue'
 import FileCard from './filecard.vue'
 import LandscapeCards from './landscapecards.vue'
 import PortraitCards from './portraitcards.vue'
+
+import useResize from '../../components/useresize'
 
 export default defineComponent({
   name: 'Home',
@@ -19,32 +21,39 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const axios: any = inject('axios')
-    const cards = ref([])
+    const onResize = useResize()
+    const cards = reactive([])
     const orientation = ref(window.innerWidth > window.innerHeight)
     const refreshKey = ref(0)
 
     const fileCardItemHeight = 48
     const fileCardPadding = 20
     const fileCardBorder = 1
-    const fileCardContentHeight = window.innerHeight * 0.8 - (fileCardPadding + fileCardBorder) * 2
-    const fileCardRowNumber = Math.floor(fileCardContentHeight / fileCardItemHeight)
+    let fileCardContentHeight
+    let fileCardRowNumber
+    let responseData
 
     axios.get('api/recent/')
       .then((response: { data: any[] }) => {
-        while (response.data.length !== 0) {
-          const firstElement = response.data.shift()
-          buildCards(firstElement, response.data)
-        }
-        // console.log(cards.value)
+        responseData = response.data
+        buildFromData()
       })
 
-    let resizeTimer: number | null = null
-    window.onresize = () => {
-      if(resizeTimer) clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(() => {
-        orientation.value = window.innerWidth > window.innerHeight
-        refreshKey.value++
-      }, 100)
+    onResize(() => {
+      while (cards.length !== 0) cards.pop()
+      buildFromData()
+      orientation.value = window.innerWidth > window.innerHeight
+      refreshKey.value++
+    })
+
+    function buildFromData() {
+      fileCardContentHeight = window.innerHeight * 0.8 - (fileCardPadding + fileCardBorder) * 2
+      fileCardRowNumber = Math.floor(fileCardContentHeight / fileCardItemHeight)
+      let data = [...responseData]
+      while (data.length !== 0) {
+        const firstElement = data.shift()
+        buildCards(firstElement, data)
+      }
     }
 
     function buildCards(el: any, data: any[]) {
@@ -61,7 +70,7 @@ export default defineComponent({
         card['component'] = shallowRef(ImageCard)
         card['data'] = { ids }
       }
-      cards.value.push(card)
+      cards.push(card)
     }
 
     function pickRestFiles(data: any[]) {
@@ -103,18 +112,16 @@ export default defineComponent({
       <i class="el-icon-d-arrow-left"></i>
     </el-header>
     <el-main>
-      <transition name="el-fade-in-linear">
-        <div :key="refreshKey">
-          <landscape-cards
-            v-if="orientation"
-            :cards="cards"
-          ></landscape-cards>
-          <portrait-cards
-            v-else
-            :cards="cards"
-          ></portrait-cards>
-        </div>
-      </transition>
+      <landscape-cards
+        v-if="orientation"
+        :cards="cards"
+        :key="refreshKey"
+      ></landscape-cards>
+      <portrait-cards
+        v-else
+        :cards="cards"
+        :key="refreshKey"
+      ></portrait-cards>
     </el-main>
     <el-footer height="0"></el-footer>
   </el-container>
@@ -153,7 +160,10 @@ export default defineComponent({
 
 .el-main
   background-color #f1e5c9
-  padding 20px 50px
+
+@media screen and (min-width: 768px)
+  .el-main
+    padding 20px 50px
 
 @keyframes shallow {
   0% {

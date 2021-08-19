@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, ref, inject } from 'vue'
+import { defineComponent, ref, inject, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import CustomPage from '../../components/custompage.vue'
 import { ElMessage } from 'element-plus'
@@ -12,7 +12,7 @@ export default defineComponent({
   setup(props, ctx) {
     const router = useRouter()
     const axios: any = inject('axios')
-    const data = ref([])
+    const data = reactive([])
 
     axios.get('api/file/')
       .then((response: { data: any[] }) => {
@@ -27,7 +27,7 @@ export default defineComponent({
             i++
           }
           size = `${size.toFixed(2)}${UNITS[i]}`
-          data.value.push({ src: item.file, name: item.name, size, time})
+          data.push({ src: item.file, name: item.name, size, time})
         })
       })
     return {

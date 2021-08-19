@@ -1,8 +1,10 @@
 <script lang='ts'>
-import { defineComponent, ref, inject, Ref } from 'vue'
+import { defineComponent, ref, inject, Ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import EllipsisText from '../../components/ellipsistext.vue'
 import CustomPage from '../../components/custompage.vue'
+
+import useResize from '../../components/useresize'
 
 export default defineComponent({
   name: 'BlogList',
@@ -11,8 +13,10 @@ export default defineComponent({
     CustomPage,
   },
   setup(prop, ctx) {
+    const onResize = useResize()
+    const router = useRouter()
     const axios: any = inject('axios')
-    const list: Ref<any[]> = ref([])
+    const list = reactive([])
     const ellipsisTextKey = ref(0)
 
     axios.get('api/blog/')
@@ -20,17 +24,11 @@ export default defineComponent({
         console.log(response.data)
         response.data.forEach(item => {
           item.created = item.created.substring(0, item.created.indexOf('.')).replace('T', ' ')
-          list.value.push(item)
+          list.push(item)
         })
       })
 
-    let resizeTimer: number | null = null
-    window.onresize = () => {
-      if(resizeTimer) clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(() => { ellipsisTextKey.value++ }, 100)
-    }
-
-    const router = useRouter()
+    onResize(() => { ellipsisTextKey.value++ })
 
     return {
       list,

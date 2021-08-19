@@ -7,14 +7,13 @@ export default defineComponent({
   name: 'Navbar',
   setup(props, ctx) {
     const drawer = ref(false)
-    const collections = ref([{ name: '图片', key: 'image' },
-                             { name: '博客', key: 'blog' },
-                             { name: '文件', key: 'file'}])
-    const selfinfo = ref([{ name: '实验', key: 'expriment' },
-                          { name: '背景', key: 'background'},
-                          { name: '联系', key: 'contact'}])
-
     const activeIndex = ref(0)
+    const collections = [{ name: '图片', key: 'image' },
+                         { name: '博客', key: 'blog' },
+                         { name: '文件', key: 'file'}]
+    const selfinfo = [{ name: '实验', key: 'expriment' },
+                      { name: '背景', key: 'background'},
+                      { name: '联系', key: 'contact'}]
 
     const router = useRouter()
 
@@ -58,23 +57,24 @@ export default defineComponent({
       <el-row
         justify="center"
         align="middle"
-        :gutter="20"
       >
         <el-col
           v-for="(item, index) in collections"
           :key="index"
           :span="2"
+          :xs="3"
         >
           <span @click="handleNavClick(item.key)">{{ item.name }}</span>
           <div class="linear-line"></div>
         </el-col>
 
-        <el-col :span="4"></el-col>
+        <el-col :span="4" :xs="2"></el-col>
 
         <el-col
           v-for="(item, index) in selfinfo"
           :key="index"
           :span="2"
+          :xs="3"
         >
           <span @click="handleTodoClick">{{ item.name }}</span>
           <div class="linear-line"></div>

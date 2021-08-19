@@ -3,12 +3,15 @@ import { defineComponent, ref, inject, onMounted, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import CustomPage from '../../components/custompage.vue'
 
+import useResize from '../../components/useresize'
+
 export default defineComponent({
   name: 'ImageList',
   components: {
     CustomPage,
   },
   setup(prop, ctx) {
+    const onResize = useResize()
     const router = useRouter()
     const imglist = ref<{ top: number; left: number; width: number; height: number; src: string }[]>([]) 
     const srclist = ref([])
@@ -21,7 +24,7 @@ export default defineComponent({
 
       function buildImgList() {
         const columnNumber = Math.floor(innerWidth / 300)
-        
+
         imglist.value = []
         srclist.value = []
         // compute image width
@@ -53,11 +56,7 @@ export default defineComponent({
       }
       buildImgList()
 
-      let resizeTimer: number | null = null
-      window.onresize = () => {
-        if(resizeTimer) clearTimeout(resizeTimer)
-        resizeTimer = setTimeout(() => { buildImgList() }, 100)
-      }
+      onResize(() => { buildImgList() })
     })
     return {
       waterfall,

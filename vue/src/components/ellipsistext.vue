@@ -12,7 +12,6 @@ export default defineComponent({
   emits: ['click'],
   setup(prop, ctx) {
     const ellipsisText = ref<HTMLDivElement>()
-    const handleClick = (key: string) => { ctx.emit('click', key) }
     const showEllipsis = ref(false)
 
     const changeEllipsisText = () => {
@@ -37,7 +36,9 @@ export default defineComponent({
     return {
       ellipsisText,
       showEllipsis,
-      handleClick,
+      handleClick(key: string) {
+        ctx.emit('click', key)
+      }
     }
   }
 })

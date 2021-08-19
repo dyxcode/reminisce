@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, ref, Ref, inject } from 'vue'
+import { defineComponent, ref, inject, reactive } from 'vue'
 
 export default defineComponent({
   name: 'BlogCard',
@@ -12,7 +12,7 @@ export default defineComponent({
   setup(props, ctx) {
     const axios: any = inject('axios')
     const title = ref('')
-    const paragraphs: Ref<String[]> = ref([])
+    const paragraphs = reactive([])
     const created = ref('')
 
     axios.get(`api/blog/${props.id}`)
@@ -20,7 +20,7 @@ export default defineComponent({
         title.value = response.data.title
         const article: String = response.data.text
         article.split('\n').forEach(item => {
-          paragraphs.value.push(item)
+          paragraphs.push(item)
         })
         created.value = response.data.created.substring(0, response.data.created.indexOf('.')).replace('T', ' ')
       })
@@ -58,10 +58,15 @@ export default defineComponent({
   .el-container
     height 100%
     .el-header
-      line-height 30px
-      font-size 25px
-      text-align center
-    p
       line-height 20px
-      padding-bottom 10px
+      font-size 20px
+      text-align center
+      padding 0
+    .el-main
+      padding 12px 0 0
+      p
+        line-height 20px
+        padding-bottom 10px
+    .el-footer
+      padding 10px 0 0
 </style>

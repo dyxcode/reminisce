@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, ref, Ref, inject, PropType, onBeforeUpdate, onMounted } from 'vue'
+import { defineComponent, ref, Ref, reactive, inject, PropType, onBeforeUpdate, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'ImageCard',
@@ -11,7 +11,7 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const axios: any = inject('axios')
-    const urls = ref(Array(props.ids.length).fill(''))
+    const urls = reactive(Array(props.ids.length).fill(''))
     const imageContainers: Ref<HTMLElement[]> = ref([])
 
     onBeforeUpdate(() => { imageContainers.value = [] })
@@ -21,7 +21,7 @@ export default defineComponent({
       promises.push(new Promise(resolve => {
         axios.get(`api/image/${id}`)
           .then((response: { data: any }) => {
-            urls.value[i] = response.data.image
+            urls[i] = response.data.image
             if ((response.data.width < response.data.height) !== (window.innerWidth < window.innerHeight)) {
               resolve(true)
             } else {

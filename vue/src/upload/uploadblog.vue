@@ -16,6 +16,8 @@ export default defineComponent({
         const text = blog.text.trim().replace(/\s+/g, '\n')
         axios.post('api/blog/', { title, text }).then(res => {
           console.log(res)
+          blog.title = '',
+          blog.text = ''
         })
       },
     }

@@ -10,7 +10,7 @@ export default defineComponent({
     },
   },
   setup(props, ctx) {
-    const screens = ref([])
+    let screens = ref([])
     let doubleScreen = []
 
     makeScreenFromCards(props.cards)

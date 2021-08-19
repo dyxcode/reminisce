@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, ref, PropType, inject } from 'vue'
+import { defineComponent, PropType, inject, reactive } from 'vue'
 
 export default defineComponent({
   name: 'FileCard',
@@ -15,7 +15,7 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const axios: any = inject('axios')
-    const files = ref([])
+    const files = reactive([])
 
     const promises = []
     props.ids.forEach(id => {
@@ -24,14 +24,15 @@ export default defineComponent({
           .then((response: { data: any }) => {
             const name = response.data.name
             const created = response.data.created.split('T')[0]
-            files.value.push({ name, created })
+            files.push({ name, created })
             resolve()
           })
       }))
     })
+    
     Promise.all(promises).then(() => {
-      while (files.value.length < props.rowNumber - 1) {
-          files.value.push({ name: '等待上传更多文件～', created: '' })
+      while (files.length < props.rowNumber - 1) {
+          files.push({ name: '等待上传更多文件～', created: '' })
       }
     })
     
