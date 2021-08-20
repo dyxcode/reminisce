@@ -9,6 +9,8 @@ import PortraitCards from './portraitcards.vue'
 
 import useResize from '../../components/useresize'
 
+import imgUrl from '../../assets/sea.jpg'
+
 export default defineComponent({
   name: 'Home',
   components: {
@@ -98,6 +100,7 @@ export default defineComponent({
       cards,
       orientation,
       refreshKey,
+      imgUrl,
       toMain() {
         const height = window.innerHeight
         let i = rootScrollbar.value.moveY * window.innerHeight / 100
@@ -121,7 +124,7 @@ export default defineComponent({
 <template>
   <section>
     <header>
-      <el-image class="fill" src="src/assets/sea.jpg" fit="cover"></el-image>
+      <el-image class="fill" :src="imgUrl" fit="cover"></el-image>
       <navbar :key="refreshKey"></navbar>
       <h1 class="yingwen absolute-center">reminisce</h1>
       <h1 class="zhongwen absolute-center">昔日的快乐时光</h1>
