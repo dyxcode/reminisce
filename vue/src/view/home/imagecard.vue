@@ -64,7 +64,11 @@ export default defineComponent({
         <el-image
           :src="url"
           fit="fill"
-        ></el-image>
+        >
+          <template #placeholder>
+            <div>加载中...</div>
+          </template>
+        </el-image>
       </div>
     </el-carousel-item>
   </el-carousel>

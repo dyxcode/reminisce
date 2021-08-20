@@ -85,7 +85,11 @@ export default defineComponent({
         :src="item.src"
         :preview-src-list="srclist"
         fit="fill"
-      ></el-image>
+      >
+         <template #placeholder>
+          <div>加载中...</div>
+        </template>
+      </el-image>
     </div>
   </custom-page>
 </template>

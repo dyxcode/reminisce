@@ -8,30 +8,14 @@ export default function () {
   let windowHeight = window.innerHeight
 
   onUnmounted(() => {
-    window.onresize = null
     window.onscroll = null
   })
-
-  let resizeCb: typeof window.onresize = null
-  let scrollTimer: any = null
-  window.onscroll = () => {
-    console.log(1)
-    if (window.onresize && resizeCb === null) {
-      resizeCb = window.onresize
-    }
-    window.onresize = null
-    if(scrollTimer) clearTimeout(scrollTimer)
-    scrollTimer = setTimeout(() => {
-      window.onresize = resizeCb
-    }, 2000)
-  }
 
   return function(callback: Function) {
     let resizeTimer: any = null
 
     setTimeout(() => {
       window.onresize = () => {
-        console.log('resize')
         if (window.innerWidth !== windowWidth || window.innerHeight !== windowHeight) {
           // Update the window width height for next time
           windowWidth = window.innerWidth
