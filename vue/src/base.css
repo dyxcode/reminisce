@@ -43,3 +43,8 @@ table{
   border-collapse:collapse;
   border-spacing:0;
 }
+
+.fill {
+  height: 100%;
+  width: 100%;
+}

@@ -8,7 +8,7 @@ export default function () {
   let windowHeight = window.innerHeight
 
   onUnmounted(() => {
-    window.onscroll = null
+    window.onresize = null
   })
 
   return function(callback: Function) {

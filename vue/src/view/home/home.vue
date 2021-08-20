@@ -121,11 +121,13 @@ export default defineComponent({
 <template>
   <section>
     <header>
-      <div class="img-container"></div>
+      <el-image class="fill" src="src/assets/sea.jpg" fit="cover"></el-image>
       <navbar :key="refreshKey"></navbar>
-      <h1 class="yingwen">reminisce</h1>
-      <h1 class="zhongwen">昔日的快乐时光</h1>
-      <i class="el-icon-d-arrow-left" @click="toMain"></i>
+      <h1 class="yingwen absolute-center">reminisce</h1>
+      <h1 class="zhongwen absolute-center">昔日的快乐时光</h1>
+      <span class="absolute-center">
+        <i class="el-icon-d-arrow-left" @click="toMain"></i>
+      </span>
     </header>
     <main>
       <landscape-cards
@@ -143,36 +145,31 @@ export default defineComponent({
 </template>
 
 <style lang="stylus" scoped>
+.absolute-center
+  position absolute
+  width 100%
+  text-align center
 header
   position relative
   height 100vh
-  padding 0
-  background-color #030303
-  text-align center
-  .img-container
-    position absolute
-    width 100%
-    height 100%
-    animation shallow 10s linear alternate infinite
-  .navbar
-    position relative
-  h1
-    position relative
-    color #def
-    text-align center
+  overflow hidden
+  color #fff
+  .el-image
+    animation zoom linear 25s alternate infinite
   .yingwen
-    margin-top 30vh
+    top 35vh
     font-size 30px
     font-weight 400
     letter-spacing 3px
   .zhongwen
-    margin-top 5vh
+    top 50vh
     letter-spacing 0.5em
-  i
-    color #def
-    font-size 30px
-    margin-top 40vh
-    animation up 2s linear alternate infinite
+  span
+    bottom 5vh
+    i
+      color #def
+      font-size 30px
+      animation up 2s linear alternate infinite
 
 main
   padding 20px
@@ -182,22 +179,17 @@ main
   main
     padding 20px 50px
 
-@keyframes shallow {
-  0% {
-    background url("../../assets/earth-1.jpg") no-repeat center
-    background-size contain
-  }
-  100% {
-    background url("../../assets/earth-2.jpg") no-repeat center
-    background-size contain
+@keyframes zoom{
+  to {
+    transform scale(1.24)
   }
 }
 
 @keyframes up {
-  0% {
+  from {
     transform rotate(90deg)
   }
-  100% {
+  to {
     transform rotate(90deg) translate(-2vh, 0)
   }
 }

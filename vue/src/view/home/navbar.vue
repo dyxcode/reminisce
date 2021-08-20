@@ -52,7 +52,7 @@ export default defineComponent({
       custom-class="no-background-color"
       :lock-scroll="false"
       :withHeader="false"
-      :size="55"
+      :size="50"
     >
       <el-row
         justify="center"
@@ -92,22 +92,24 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 .navbar
-  .el-affix
-    text-align right
-    i
-      color #667788
-      font-size 30px
-      padding 10px
-      transform rotate(-90deg)
-      cursor pointer
+  position absolute
+  top 0
+  right 0
+  i
+    color #667788
+    font-size 30px
+    padding 10px
+    transform rotate(-90deg)
+    cursor pointer
 
   .el-row
     text-align center
     white-space nowrap
     color #cde
-    height 55px
+    height 45px
 
     .el-col
+      height 20px
       span
         cursor pointer
       .linear-line
