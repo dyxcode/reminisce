@@ -35,39 +35,38 @@ export default defineComponent({
 
 <template>
   <el-card :body-style="{ height: '100%' }">
-    <el-container>
-      <el-header height="30px">{{ title }}</el-header>
-      <el-main>
-        <el-scrollbar height="100%">
-          <p
-            v-for="(item, idx) in paragraphs"
-            :key="idx"
-          >
-            {{ item }}
-          </p>
-        </el-scrollbar>
-      </el-main>
-      <el-footer height="auto">发表于：{{ created }}</el-footer>
-    </el-container>
+    <header>{{ title }}</header>
+    <main>
+      <el-scrollbar>
+        <p
+          v-for="(item, idx) in paragraphs"
+          :key="idx"
+        >{{ item }}</p>
+      </el-scrollbar>
+    </main>
+    <footer>发表于：{{ created }}</footer>
   </el-card>
 </template>
 
 <style lang="stylus" scoped>
 .el-card
   height 80vh
-  .el-container
-    height 100%
-    .el-header
+
+  header
+    height 5%
+    line-height 20px
+    font-size 20px
+    text-align center
+    padding 0
+  main
+    height 90%
+    padding 12px 0 0
+    p
       line-height 20px
-      font-size 20px
-      text-align center
-      padding 0
-    .el-main
-      padding 12px 0 0
-      p
-        line-height 20px
-        padding-bottom 10px
-    .el-footer
-      padding 10px 0 0
-      text-align center
+      padding-bottom 10px
+  footer
+    height 5%
+    flex-shrink 0
+    padding 10px 0 0
+    text-align center
 </style>

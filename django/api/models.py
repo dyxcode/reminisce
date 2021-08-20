@@ -36,3 +36,6 @@ class RecentModel(models.Model):
   type = models.CharField(max_length=8)
 
   target_id = models.BigIntegerField()
+
+  class Meta:
+    ordering = ['-id']

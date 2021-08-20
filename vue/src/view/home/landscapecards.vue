@@ -27,6 +27,10 @@ export default defineComponent({
           insertSingleScreen(card)
         }
       })
+      if (doubleScreen.length) {
+        screens.value.push({ doubleScreen, isSingle: false })
+        doubleScreen = []
+      }
     }
 
     function insertSingleScreen(card: any) {

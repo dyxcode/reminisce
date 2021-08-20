@@ -1,7 +1,4 @@
 import {
-  ElContainer,
-  ElHeader,
-  ElMain,
   ElDialog,
   ElButton,
   ElForm,
@@ -13,7 +10,6 @@ import {
   ElTableColumn,
   ElCard,
   ElScrollbar,
-  ElFooter,
   ElCarousel,
   ElImage,
   ElCarouselItem,
@@ -25,9 +21,6 @@ import {
 } from 'element-plus';
 
 export default [
-  ElContainer,
-  ElHeader,
-  ElMain,
   ElDialog,
   ElButton,
   ElForm,
@@ -39,7 +32,6 @@ export default [
   ElTableColumn,
   ElCard,
   ElScrollbar,
-  ElFooter,
   ElCarousel,
   ElImage,
   ElCarouselItem,

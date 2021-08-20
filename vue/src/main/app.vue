@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, provide, ref } from 'vue'
 
 import KeyBoard from './keyboard.vue'
 import Upload from './upload.vue'
@@ -11,8 +11,12 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const showUploadModal = ref(false)
+    const rootScrollbar = ref(null)
+    provide('rootScrollbar', rootScrollbar)
+
     return {
       showUploadModal,
+      rootScrollbar,
       handleUploadClick() {
         showUploadModal.value = true
       },
@@ -25,7 +29,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <el-scrollbar height="100vh" ref="rootScrollbar">
     <router-view></router-view>
     <key-board
       @uploadClick="handleUploadClick"
@@ -34,5 +38,5 @@ export default defineComponent({
       v-if="showUploadModal"
       @close="handleClose"
     ></upload>
-  </div>
+  </el-scrollbar>
 </template>

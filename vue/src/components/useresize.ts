@@ -15,6 +15,7 @@ export default function () {
   let resizeCb: typeof window.onresize = null
   let scrollTimer: any = null
   window.onscroll = () => {
+    console.log(1)
     if (window.onresize && resizeCb === null) {
       resizeCb = window.onresize
     }
@@ -30,6 +31,7 @@ export default function () {
 
     setTimeout(() => {
       window.onresize = () => {
+        console.log('resize')
         if (window.innerWidth !== windowWidth || window.innerHeight !== windowHeight) {
           // Update the window width height for next time
           windowWidth = window.innerWidth

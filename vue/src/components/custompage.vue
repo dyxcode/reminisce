@@ -25,25 +25,28 @@ export default defineComponent({
 </script>
 
 <template>
-  <el-container>
-    <el-header height="50px">
-      <i class="el-icon-back" @click="goBack"></i>
-      <h2>{{ title }}</h2>
-    </el-header>
-    <el-main>
+  <section>
+    <el-affix>
+      <header>
+        <i class="el-icon-back" @click="goBack"></i>
+        <h2>{{ title }}</h2>
+      </header>
+    </el-affix>
+    <main>
       <slot></slot>
-    </el-main>
-  </el-container>
+    </main>
+  </section>
 </template>
 
 <style lang="stylus" scoped>
-.el-container
+section
   background-color #f1e5c9
   min-height 100vh
 
-  .el-header
+  header
     display flex
     align-items center
+    height 50px
     background-color #030303
     color #ccc
     i
@@ -51,6 +54,7 @@ export default defineComponent({
       z-index 1
       font-size 20px
       cursor pointer
+      margin-left 10px
     h2
       position absolute
       left 0
@@ -59,7 +63,7 @@ export default defineComponent({
       font-weight 500
       color #ccc
 
-  .el-main
+  main
     width 80%
     margin 0 auto
     padding-bottom 30px

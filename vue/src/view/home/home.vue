@@ -21,6 +21,7 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const axios: any = inject('axios')
+    const rootScrollbar: any = inject('rootScrollbar')
     const onResize = useResize()
     const cards = reactive([])
     const orientation = ref(window.innerWidth > window.innerHeight)
@@ -97,21 +98,36 @@ export default defineComponent({
       cards,
       orientation,
       refreshKey,
+      toMain() {
+        const height = window.innerHeight
+        let i = rootScrollbar.value.moveY * window.innerHeight / 100
+        let step = (height - i) / 100
+        function smoothScroll() {
+          setTimeout(() => {
+            rootScrollbar.value.setScrollTop(i)
+            if (i < height) {
+              i = (i + step <= height) ? i + step : height
+              smoothScroll()
+            }
+          }, 1)
+        }
+        smoothScroll()
+      }
     }
   },
 })
 </script>
 
 <template>
-  <el-container>
-    <el-header height="100vh">
+  <section>
+    <header>
       <div class="img-container"></div>
       <navbar :key="refreshKey"></navbar>
       <h1 class="yingwen">reminisce</h1>
       <h1 class="zhongwen">昔日的快乐时光</h1>
-      <i class="el-icon-d-arrow-left"></i>
-    </el-header>
-    <el-main>
+      <i class="el-icon-d-arrow-left" @click="toMain"></i>
+    </header>
+    <main>
       <landscape-cards
         v-if="orientation"
         :cards="cards"
@@ -122,14 +138,14 @@ export default defineComponent({
         :cards="cards"
         :key="refreshKey"
       ></portrait-cards>
-    </el-main>
-    <el-footer height="0"></el-footer>
-  </el-container>
+    </main>
+  </section>
 </template>
 
 <style lang="stylus" scoped>
-.el-header
+header
   position relative
+  height 100vh
   padding 0
   background-color #030303
   text-align center
@@ -158,11 +174,12 @@ export default defineComponent({
     margin-top 40vh
     animation up 2s linear alternate infinite
 
-.el-main
+main
+  padding 20px
   background-color #f1e5c9
 
 @media screen and (min-width: 768px)
-  .el-main
+  main
     padding 20px 50px
 
 @keyframes shallow {
