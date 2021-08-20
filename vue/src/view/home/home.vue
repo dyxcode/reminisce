@@ -158,6 +158,7 @@ header
   overflow hidden
   color #fff
   .el-image
+    position absolute
     animation zoom linear 25s alternate infinite
   .yingwen
     top 35vh
@@ -169,6 +170,7 @@ header
     letter-spacing 0.5em
   span
     bottom 5vh
+    cursor pointer
     i
       color #def
       font-size 30px
