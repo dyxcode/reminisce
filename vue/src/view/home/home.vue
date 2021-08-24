@@ -124,7 +124,11 @@ export default defineComponent({
 <template>
   <section class="home">
     <header>
-      <el-image class="fill" :src="imgUrl" fit="cover"></el-image>
+      <el-image class="fill" :src="imgUrl" fit="cover">
+        <template #placeholder>
+          <div class="fill"></div>
+        </template>
+      </el-image>
       <navbar :resize="refreshKey"></navbar>
       <h1 class="yingwen absolute-center">reminisce</h1>
       <h1 class="zhongwen absolute-center">昔日的快乐时光</h1>
@@ -164,10 +168,11 @@ header
   position relative
   height 100vh
   color #fff
-  background-color #4777a3
   .el-image
     position absolute
     overflow hidden
+    div
+      background linear-gradient(#2058ab 0%, #27539c 17%, #3a4a7b 46%, #3a4a7b 46%, #494367 56%, #543c52 92%, #722e25 100%)
   .yingwen
     top 35vh
     font-size 30px
