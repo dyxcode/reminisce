@@ -26,7 +26,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      'vue': 'https://cdn.skypack.dev/vue',
       'vue-router': 'https://cdn.skypack.dev/vue-router',
       'vue-axios': 'https://cdn.skypack.dev/vue-axios',
       'axios': 'https://cdn.skypack.dev/axios'
