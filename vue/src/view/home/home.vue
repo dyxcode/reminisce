@@ -122,10 +122,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <section>
+  <section class="home">
     <header>
       <el-image class="fill" :src="imgUrl" fit="cover"></el-image>
-      <navbar :key="refreshKey"></navbar>
+      <navbar :resize="refreshKey"></navbar>
       <h1 class="yingwen absolute-center">reminisce</h1>
       <h1 class="zhongwen absolute-center">昔日的快乐时光</h1>
       <span class="absolute-center">
@@ -147,19 +147,27 @@ export default defineComponent({
   </section>
 </template>
 
+<style lang="stylus">
+.home header .el-image__inner
+  animation zoom linear 25s alternate infinite
+
+@keyframes zoom { to { transform: scale(1.24) } }
+</style>
+
 <style lang="stylus" scoped>
 .absolute-center
   position absolute
   width 100%
   text-align center
+
 header
   position relative
   height 100vh
-  overflow hidden
   color #fff
+  background-color #4777a3
   .el-image
     position absolute
-    animation zoom linear 25s alternate infinite
+    overflow hidden
   .yingwen
     top 35vh
     font-size 30px
@@ -184,11 +192,7 @@ main
   main
     padding 20px 50px
 
-@keyframes zoom{
-  to {
-    transform scale(1.24)
-  }
-}
+
 
 @keyframes up {
   from {

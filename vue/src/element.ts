@@ -11,13 +11,10 @@ import {
   ElCard,
   ElScrollbar,
   ElCarousel,
-  ElImage,
   ElCarouselItem,
   ElRow,
   ElCol,
-  ElAffix,
-  ElDrawer,
-  ElIcon,
+  ElImage,
 } from 'element-plus';
 
 export default [
@@ -33,11 +30,8 @@ export default [
   ElCard,
   ElScrollbar,
   ElCarousel,
-  ElImage,
   ElCarouselItem,
   ElRow,
   ElCol,
-  ElAffix,
-  ElDrawer,
-  ElIcon,
+  ElImage,
 ]

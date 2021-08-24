@@ -89,6 +89,3 @@ export default defineComponent({
     </el-table>
   </custom-page>
 </template>
-
-<style lang="stylus" scoped>
-</style>

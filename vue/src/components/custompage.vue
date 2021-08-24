@@ -26,12 +26,10 @@ export default defineComponent({
 
 <template>
   <section>
-    <el-affix>
-      <header>
-        <i class="el-icon-back" @click="goBack"></i>
-        <h2>{{ title }}</h2>
-      </header>
-    </el-affix>
+    <header>
+      <i class="el-icon-back" @click="goBack"></i>
+      <h2>{{ title }}</h2>
+    </header>
     <main>
       <slot></slot>
     </main>
@@ -44,9 +42,13 @@ section
   min-height 100vh
 
   header
+    position fixed
+    top 0
+    z-index 2
     display flex
     align-items center
     height 50px
+    width 100%
     background-color #030303
     color #ccc
     i
@@ -65,6 +67,6 @@ section
 
   main
     width 80%
-    margin 0 auto
+    margin 50px auto 0px
     padding-bottom 30px
 </style>

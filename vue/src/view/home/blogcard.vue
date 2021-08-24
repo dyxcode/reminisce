@@ -14,6 +14,7 @@ export default defineComponent({
     const title = ref('')
     const paragraphs = reactive([])
     const created = ref('')
+    const isReading = ref(false)
 
     axios.get(`api/blog/${props.id}`)
       .then((response: { data: any }) => {
@@ -27,7 +28,11 @@ export default defineComponent({
     return {
       title,
       paragraphs,
-      created
+      created,
+      isReading,
+      handleReadClick() {
+        isReading.value = !isReading.value
+      },
     }
   },
 })
@@ -35,14 +40,20 @@ export default defineComponent({
 
 <template>
   <el-card :body-style="{ height: '100%' }">
+    <i
+      class="el-icon-view"
+      @click="handleReadClick"
+      :style="{ opacity: isReading ? 1 : 0.5}"
+    ></i>
     <header>{{ title }}</header>
     <main>
-      <el-scrollbar>
+      <el-scrollbar :always="isReading">
         <p
           v-for="(item, idx) in paragraphs"
           :key="idx"
         >{{ item }}</p>
       </el-scrollbar>
+      <div class="overlay fill" v-show="!isReading"></div>
     </main>
     <footer>发表于：{{ created }}</footer>
   </el-card>
@@ -50,7 +61,18 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 .el-card
+  position relative
   height 80vh
+
+  i
+    position absolute
+    top 0
+    right 0
+    color #667788
+    font-size 25px
+    padding 10px
+    cursor pointer
+    opacity 0.5
 
   header
     height 5%
@@ -59,8 +81,12 @@ export default defineComponent({
     text-align center
     padding 0
   main
+    position relative
     height 90%
     padding 12px 0 0
+    .overlay
+      position absolute
+      top 0
     p
       line-height 20px
       padding-bottom 10px

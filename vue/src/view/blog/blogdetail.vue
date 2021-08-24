@@ -56,5 +56,5 @@ p
   font-size 16px
   text-indent 2em
   line-height 25px
-  margin-bottom 10px
+  padding-top 10px
 </style>

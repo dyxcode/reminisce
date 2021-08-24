@@ -78,7 +78,7 @@ export default defineComponent({
   >
     <div class="waterfall" ref="waterfall">
       <el-image
-        class="waterfall-item"
+        class="waterfall-item centre"
         v-for="(item, index) in imglist"
         :key="index"
         :style="{top:`${item.top}px`,left:`${item.left}px`, width:`${item.width}px`, height:`${item.height}px`}"
@@ -86,8 +86,8 @@ export default defineComponent({
         :preview-src-list="srclist"
         fit="fill"
       >
-         <template #placeholder>
-          <div>加载中...</div>
+        <template #placeholder>
+          <span>LOADING</span>
         </template>
       </el-image>
     </div>
@@ -100,4 +100,7 @@ export default defineComponent({
   width 100%
   .waterfall-item
     position absolute
+    font-size 14px
+    background #f5f7fa
+    color var(--el-text-color-placeholder)
 </style>

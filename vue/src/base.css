@@ -48,3 +48,9 @@ table{
   height: 100%;
   width: 100%;
 }
+
+.centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

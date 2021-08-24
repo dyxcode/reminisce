@@ -62,11 +62,12 @@ export default defineComponent({
         :ref="el => { if (el) imageContainers[index] = el }"
       >
         <el-image
+          class="centre fill"
           :src="url"
           fit="fill"
         >
           <template #placeholder>
-            <div>加载中...</div>
+            <span>LOADING</span>
           </template>
         </el-image>
       </div>
@@ -81,6 +82,7 @@ export default defineComponent({
     height 100%
     width 100%
     .el-image
-      height 100%
-      width 100%
+      font-size 14px
+      background #f5f7fa
+      color var(--el-text-color-placeholder)
 </style>
