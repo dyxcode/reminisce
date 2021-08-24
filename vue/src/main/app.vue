@@ -30,7 +30,9 @@ export default defineComponent({
 
 <template>
   <el-scrollbar height="100vh" ref="rootScrollbar">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <key-board
       @uploadClick="handleUploadClick"
     ></key-board>
